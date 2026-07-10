@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>peptide.xml</title>
+<style>
+body {
+  margin: 0;
+  background: #f7f7f7;
+  color: #111;
+  font-family: Consolas, "Courier New", monospace;
+}
+.header {
+  position: sticky;
+  top: 0;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+h1 {
+  font-size: 18px;
+  margin: 0;
+}
+button {
+  padding: 5px 12px;
+  cursor: pointer;
+}
+pre {
+  margin: 14px;
+  padding: 14px;
+  background: #fff8ed;
+  border: 1px solid #e2d5c0;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.35;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>peptide.xml</h1>
+  <button onclick="copyXml()">Copy</button>
+  <span id="status"></span>
+</div>
+<pre id="xmlcode">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;galamost_xml version=&quot;1.3&quot;&gt;
+&lt;configuration time_step=&quot;0&quot; dimensions=&quot;3&quot; natoms=&quot;29&quot; &gt;
+&lt;box lx=&quot;40&quot; ly=&quot;40&quot; lz=&quot;40&quot;/&gt;
+&lt;position num=&quot;29&quot;&gt;
+0	0	0
+0.2	0.4	0
+0.4	0	0
+0.6	0.4	0
+0.8	0	0
+1.0	0.4	0
+1.2	0	0
+1.4	0.4	0
+1.6	0	0
+1.8	0.4	0
+2.0	0	0
+2.2	0.4	0
+2.4	0	0
+3.0	0	0
+3.5	0	0
+4.0	0	0
+4.25	0.4	0
+4.25	-0.4	0
+4.5	0	0
+4.75	0.4	0
+4.75	-0.4	0
+5.0	0	0
+5.25	0.4	0
+5.25	-0.4	0
+5.5	0	0
+5.75	0.4	0
+5.75	-0.4	0
+6.0	0	0
+6.5	0	0
+&lt;/position&gt;
+&lt;image num=&quot;29&quot;&gt;
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+&lt;/image&gt;
+&lt;mass num=&quot;29&quot;&gt;
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+72.0000000000
+&lt;/mass&gt;
+&lt;body num=&quot;50&quot;&gt;
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+-1
+&lt;/body&gt;
+&lt;type num=&quot;29&quot;&gt;
+A
+B
+A
+B
+A
+B
+A
+B
+A
+B
+A
+B
+A
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+&lt;/type&gt;
+&lt;bond&gt;
+A-B 0 1
+A-B 1 2
+A-B 2 3
+A-B 3 4
+A-B 4 5
+A-B 5 6
+A-B 6 7
+A-B 7 8
+A-B 8 9
+A-B 9 10
+A-B 10 11
+A-B 11 12
+A-C 12 13
+C-C 13 14
+C-C 14 15
+C-C 15 16
+C-C 15 17
+C-C 15 18
+C-C 18 19
+C-C 18 20
+C-C 18 21
+C-C 21 22
+C-C 21 23
+C-C 21 24
+C-C 24 25
+C-C 24 26
+C-C 24 27
+C-C 27 28
+&lt;/bond&gt;
+&lt;/configuration&gt;
+&lt;/galamost_xml&gt;
+</pre>
+<script>
+function copyXml() {
+  const text = document.getElementById('xmlcode').innerText;
+  const status = document.getElementById('status');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      status.textContent = 'Copied';
+    }).catch(() => fallbackCopy(text, status));
+  } else {
+    fallbackCopy(text, status);
+  }
+}
+function fallbackCopy(text, status) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  status.textContent = 'Copied';
+}
+</script>
+</body>
+</html>

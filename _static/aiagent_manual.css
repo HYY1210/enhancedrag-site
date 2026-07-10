@@ -1,0 +1,541 @@
+/* Project-local Sphinx polish layer.
+   No extra Sphinx extension is required; works with Sphinx 5.x + alabaster. */
+
+:root {
+  --agent-border: #d7dee8;
+  --agent-bg: #fbfcfe;
+  --agent-bg-soft: #f6f8fb;
+  --agent-text-muted: #5b6675;
+  --agent-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --manual-h1-color: #111827;
+  --manual-h2-color: #1f2937;
+  --manual-h3-color: #1d4ed8;
+  --manual-h4-color: #0f766e;
+  --manual-api-signature-color: #1d4ed8;
+  --manual-api-accent-soft: #dbeafe;
+  --manual-nav-title-color: #64748b;
+  --manual-nav-link-color: #64748b;
+  --manual-nav-border-color: #cbd5e1;
+  --manual-nav-hover-bg: #f8fafc;
+  --manual-nav-hover-color: #334155;
+}
+
+/* Make generated case pages less cramped. */
+div.document {
+  width: 96%;
+  max-width: 1480px;
+}
+
+div.body {
+  max-width: 1180px;
+}
+
+@media screen and (min-width: 1100px) {
+  div.body {
+    /* Reserve a right-side gutter for the fixed Method Navigation panel. */
+    max-width: min(940px, calc(100vw - 560px));
+  }
+}
+
+div.bodywrapper {
+  margin-left: 280px;
+}
+
+div.sphinxsidebar {
+  width: 260px;
+}
+
+@media screen and (max-width: 875px) {
+  div.bodywrapper {
+    margin-left: 0;
+  }
+
+  div.sphinxsidebar {
+    width: auto;
+  }
+}
+
+/* General readability. */
+div.body h1 {
+  color: var(--manual-h1-color);
+  font-weight: 800;
+  margin-top: 0.3rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--agent-border);
+}
+
+div.body h2 {
+  color: var(--manual-h2-color);
+  font-weight: 500;
+  margin-top: 1.65rem;
+  padding-top: 0.25rem;
+}
+
+div.body h3 {
+  color: var(--manual-h3-color);
+  font-weight: 650;
+  margin-top: 1.15rem;
+}
+
+div.body h4 {
+  color: var(--manual-h4-color);
+  font-weight: 650;
+}
+
+/* Tables used by case overview and generated artifact inventory. */
+table.docutils.case-meta-table,
+table.docutils.artifacts-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: var(--agent-shadow);
+}
+
+table.docutils.case-meta-table th,
+table.docutils.case-meta-table td,
+table.docutils.artifacts-table th,
+table.docutils.artifacts-table td {
+  padding: 0.48rem 0.62rem;
+  vertical-align: top;
+}
+
+table.docutils.artifacts-table td:nth-child(3) code {
+  font-weight: 700;
+}
+
+/* Panel containers for run, trees and raw evidence. */
+.aiagent-panel {
+  background: var(--agent-bg);
+  border: 1px solid var(--agent-border);
+  border-radius: 10px;
+  box-shadow: var(--agent-shadow);
+  margin: 0.65rem 0 1.25rem 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+}
+
+.aiagent-panel > p:first-child {
+  color: var(--agent-text-muted);
+  margin-top: 0;
+}
+
+.run-panel {
+  background: #fffdf8;
+}
+
+.tree-panel {
+  background: #f9fbff;
+}
+
+.file-tree-panel {
+  border-left: 5px solid #7aa2f7;
+}
+
+.dynamics-tree-panel {
+  border-left: 5px solid #9ece6a;
+}
+
+.model-tree-panel {
+  border-left: 5px solid #bb9af7;
+}
+
+.raw-file-panel {
+  background: var(--agent-bg-soft);
+}
+
+.python-source-panel {
+  border-left: 5px solid #f6c177;
+}
+
+/* Code and literal blocks. */
+div.highlight,
+div.literal-block-wrapper,
+pre.literal-block {
+  border-radius: 8px;
+}
+
+pre {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+.aiagent-panel pre {
+  margin-bottom: 0;
+}
+
+/* Tree text benefits from a slightly tighter monospace layout. */
+.tree-panel pre {
+  font-size: 0.88rem;
+  line-height: 1.42;
+}
+
+.case-profile-panel {
+  background: #f8fff9;
+  border-left: 5px solid #6abf69;
+}
+
+.case-profile-panel .rubric {
+  margin-top: 0.9rem;
+  font-weight: 700;
+}
+
+/* API reference readability layer: minimal style polish only.
+   Keep the original Sphinx page structure; distinguish method names,
+   one-line descriptions, signatures and argument tables by color/spacing. */
+:root {
+  --api-title: #245c9f;
+  --api-title-dark: #1e3a5f;
+  --api-desc-bg: #f6f9fd;
+  --api-desc-border: #d7e4f5;
+  --api-desc-text: #43566f;
+  --api-table-head: #f2f6fb;
+  --api-table-border: #dce3ec;
+}
+
+body, div.body {
+  color: #222831;
+}
+
+div.body p,
+div.body li,
+div.body td,
+div.body th {
+  line-height: 1.58;
+}
+
+div.body a {
+  color: var(--api-title);
+}
+
+/* Clickable heading color palette. This is a front-end-only reader aid:
+   it changes CSS variables and never changes generated RST or baseRAG facts. */
+.heading-color-picker {
+  position: fixed;
+  right: 1.1rem;
+  top: 0.85rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #d7dee8;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  padding: 0.38rem 0.55rem;
+  font-size: 12px;
+}
+
+.heading-color-picker__label {
+  color: #4b5563;
+  font-weight: 700;
+  margin-right: 0.15rem;
+}
+
+.heading-color-picker__swatch {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.heading-color-picker__swatch:hover,
+.heading-color-picker__swatch:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 2px #94a3b8;
+  outline: none;
+}
+
+.heading-color-picker__swatch.is-active {
+  box-shadow: 0 0 0 2px #111827, 0 0 0 4px #e5e7eb;
+}
+
+/* Keep Method Navigation compact, but make links easier to scan. */
+.api-method-navigation table.hlist,
+section#method-navigation > table.hlist {
+  margin: 0.25rem 0 0.8rem 0;
+  width: 100%;
+}
+
+.api-method-navigation table.hlist td,
+section#method-navigation > table.hlist td {
+  padding: 0.08rem 0.45rem 0.18rem 0;
+}
+
+.api-method-navigation table.hlist a,
+section#method-navigation > table.hlist a {
+  color: var(--api-title);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.api-method-navigation table.hlist a:hover,
+section#method-navigation > table.hlist a:hover {
+  text-decoration: underline;
+}
+
+/* Method titles: only color/weight changes; no new cards or summary blocks. */
+section#methods > section h3,
+section#methods > section h4,
+section#constructors h3,
+section#constructors h4 {
+  color: var(--api-title-dark);
+  font-weight: 700;
+  margin-top: 1.35rem;
+  padding-bottom: 0.18rem;
+  border-bottom: 1px solid #e6edf5;
+}
+
+/* One-line method explanation directly under the function name. */
+.api-method-description {
+  background: var(--api-desc-bg);
+  border-left: 4px solid var(--api-desc-border);
+  color: var(--api-desc-text);
+  margin: 0.35rem 0 0.65rem 0;
+  padding: 0.42rem 0.7rem;
+}
+
+.api-method-description p {
+  margin: 0;
+}
+
+/* Sphinx py:method signature block: keep compact, but visually distinct. */
+section#methods dl.py.method,
+section#constructors dl.py.method,
+dl.py.method {
+  background: #fbfcfe;
+  border: 1px solid #e3e9f1;
+  border-radius: 6px;
+  margin: 0.45rem 0 0.65rem 0;
+  padding: 0.42rem 0.6rem;
+}
+
+section#methods dl.py.method dt,
+section#constructors dl.py.method dt,
+dl.py.method dt {
+  color: var(--manual-api-signature-color);
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.93rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+/* Parameter tables: subtle header/background only. */
+section#methods table.docutils,
+section#constructors table.docutils {
+  border-collapse: collapse;
+  margin: 0.45rem 0 0.8rem 0;
+  width: 100%;
+}
+
+section#methods table.docutils th,
+section#constructors table.docutils th {
+  background: var(--api-table-head);
+  color: #26384d;
+  font-weight: 700;
+}
+
+section#methods table.docutils td,
+section#methods table.docutils th,
+section#constructors table.docutils td,
+section#constructors table.docutils th {
+  border-color: var(--api-table-border);
+  padding: 0.46rem 0.58rem;
+  vertical-align: top;
+}
+
+section#methods code,
+section#constructors code {
+  background: #f4f6f9;
+  border: 1px solid #e2e7ef;
+  border-radius: 4px;
+  color: #243b55;
+  padding: 0.05rem 0.18rem;
+}
+
+@media screen and (max-width: 875px) {
+  .heading-color-picker {
+    left: 0.7rem;
+    right: auto;
+    top: auto;
+    bottom: 0.7rem;
+  }
+
+  .api-method-navigation table.hlist td,
+  section#method-navigation > table.hlist td {
+    display: block;
+  }
+
+  section#methods table.docutils,
+  section#constructors table.docutils {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Move generated Page Navigation into a fixed right-side floating panel.
+   API pages build this from section and callable anchors in the rendered HTML. */
+.sidebar-method-navigation {
+  position: fixed;
+  right: 1.1rem;
+  top: 3.65rem;
+  z-index: 9998;
+  width: 210px;
+  max-height: calc(100vh - 5rem);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(203, 213, 225, 0.72);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+  font-size: 0.76rem;
+  opacity: 0.72;
+  padding: 0.52rem 0.48rem 0.56rem 0.48rem;
+  transition: opacity 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.sidebar-method-navigation:hover,
+.sidebar-method-navigation:focus-within {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
+  opacity: 1;
+}
+
+.sidebar-method-navigation h2,
+.sidebar-method-navigation-title {
+  color: var(--manual-nav-title-color);
+  font-size: 0.8rem;
+  font-weight: 650;
+  margin: 0 0 0.45rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.sidebar-method-navigation h2 .headerlink {
+  display: none;
+}
+
+.sidebar-method-navigation .api-method-navigation,
+.sidebar-method-navigation .page-section-navigation {
+  max-height: calc(100vh - 8.3rem);
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.sidebar-method-navigation table.hlist,
+.sidebar-method-navigation table.hlist tbody,
+.sidebar-method-navigation table.hlist tr,
+.sidebar-method-navigation table.hlist td {
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sidebar-method-navigation table.hlist ul,
+.sidebar-method-navigation .page-section-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-method-navigation table.hlist li,
+.sidebar-method-navigation .page-section-navigation li {
+  margin: 0.14rem 0;
+  padding: 0;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-1 {
+  margin-top: 0.34rem;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-1:first-child {
+  margin-top: 0;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-1 a {
+  border-left-color: var(--manual-nav-title-color);
+  color: var(--manual-nav-hover-color);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  padding-top: 0.18rem;
+  padding-bottom: 0.18rem;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-2 {
+  margin-left: 0.54rem;
+  margin-top: 0.2rem;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-2 a {
+  border-left-color: rgba(203, 213, 225, 0.62);
+  color: var(--manual-nav-link-color);
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.9;
+  padding-top: 0.13rem;
+  padding-bottom: 0.13rem;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-3 {
+  margin-left: 1.12rem;
+  margin-top: 0.06rem;
+}
+
+.sidebar-method-navigation .page-section-navigation__item--level-3 a {
+  border-left-color: rgba(203, 213, 225, 0.45);
+  color: var(--manual-nav-link-color);
+  font-size: 0.64rem;
+  font-weight: 500;
+  opacity: 0.76;
+  padding-top: 0.08rem;
+  padding-bottom: 0.08rem;
+}
+
+.sidebar-method-navigation table.hlist li p {
+  margin: 0;
+}
+
+.sidebar-method-navigation table.hlist a,
+.sidebar-method-navigation .page-section-navigation a {
+  display: block;
+  border-left: 2px solid var(--manual-nav-border-color);
+  color: var(--manual-nav-link-color);
+  line-height: 1.22;
+  padding: 0.13rem 0.16rem 0.13rem 0.32rem;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-method-navigation table.hlist a:hover,
+.sidebar-method-navigation table.hlist a:focus,
+.sidebar-method-navigation .page-section-navigation a:hover,
+.sidebar-method-navigation .page-section-navigation a:focus {
+  background: var(--manual-nav-hover-bg);
+  border-left-color: var(--manual-nav-title-color);
+  color: var(--manual-nav-hover-color);
+}
+
+@media screen and (max-width: 875px) {
+  .method-navigation-relocated {
+    display: block;
+  }
+
+  .method-navigation-relocated h2 {
+    display: block !important;
+  }
+
+  .sidebar-method-navigation {
+    display: none;
+  }
+
+  .sidebar-method-navigation .api-method-navigation,
+  .sidebar-method-navigation .page-section-navigation {
+    max-height: none;
+  }
+}

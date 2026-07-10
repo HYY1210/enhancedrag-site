@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>case_43 — [1] dynamics - [1] model &#8212; PyGAMD Manual  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a817f74c" />
+    <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/title_color_picker.js?v=0f95104d"></script>
+    <script src="../../_static/method_navigation_sidebar.js?v=8a287b32"></script>
+    <script src="../../_static/copy_code_blocks.js?v=1402178e"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="case-43-1-dynamics-1-model">
+<h1>case_43 — [1] dynamics - [1] model<a class="headerlink" href="#case-43-1-dynamics-1-model" title="Link to this heading">¶</a></h1>
+<section id="run-instructions">
+<h2>Run Instructions<a class="headerlink" href="#run-instructions" title="Link to this heading">¶</a></h2>
+<div class="aiagent-panel run-panel docutils container">
+<p class="rubric">Branch Files</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python popg_new.molg
+</pre></div>
+</div>
+<p class="rubric">Root</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python runDynamics.py --gpu=0
+</pre></div>
+</div>
+</div>
+</section>
+<section id="case-facts">
+<h2>Case Facts<a class="headerlink" href="#case-facts" title="Link to this heading">¶</a></h2>
+<section id="raw-dynamics-profile">
+<h3>Raw Dynamics Profile<a class="headerlink" href="#raw-dynamics-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">基本设置</p>
+<ul class="simple">
+<li><p>引擎：PyGAMD (poetry.cu_gala)</p></li>
+<li><p>输入 XML：<code class="docutils literal notranslate"><span class="pre">popg.xml</span></code></p></li>
+<li><p>时间步长：<code class="docutils literal notranslate"><span class="pre">0.03</span></code></p></li>
+<li><p>粒子组：<code class="docutils literal notranslate"><span class="pre">all</span></code></p></li>
+<li><p>运行步数：20000000</p></li>
+</ul>
+<p class="rubric">动力学模块</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>类</p></th>
+<th class="head"><p>变量</p></th>
+<th class="head"><p>简要事实</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MDSCFForce</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scf</span></code></p></td>
+<td><p>设置 28 项：<code class="docutils literal notranslate"><span class="pre">L-L</span></code>, <code class="docutils literal notranslate"><span class="pre">L-P</span></code>, <code class="docutils literal notranslate"><span class="pre">L-G</span></code>, <code class="docutils literal notranslate"><span class="pre">L-C</span></code>, <code class="docutils literal notranslate"><span class="pre">L-D</span></code>, <code class="docutils literal notranslate"><span class="pre">L-Na</span></code>, <code class="docutils literal notranslate"><span class="pre">L-W</span></code>, <code class="docutils literal notranslate"><span class="pre">P-P</span></code> 等</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PFMEForce</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pfme</span></code></p></td>
+<td><p>已加入运行流程</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BondForceHarmonic</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bondforce</span></code></p></td>
+<td><p>设置 6 项：<code class="docutils literal notranslate"><span class="pre">L-P</span></code>, <code class="docutils literal notranslate"><span class="pre">P-G</span></code>, <code class="docutils literal notranslate"><span class="pre">G-G</span></code>, <code class="docutils literal notranslate"><span class="pre">G-C</span></code>, <code class="docutils literal notranslate"><span class="pre">C-C</span></code>, <code class="docutils literal notranslate"><span class="pre">C-D</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AngleForceHarmonicCos</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">angleforce</span></code></p></td>
+<td><p>设置 7 项：<code class="docutils literal notranslate"><span class="pre">P-G-G</span></code>, <code class="docutils literal notranslate"><span class="pre">P-G-C</span></code>, <code class="docutils literal notranslate"><span class="pre">G-C-C</span></code>, <code class="docutils literal notranslate"><span class="pre">C-C-C</span></code>, <code class="docutils literal notranslate"><span class="pre">G-C-D</span></code>, <code class="docutils literal notranslate"><span class="pre">C-D-C</span></code>, <code class="docutils literal notranslate"><span class="pre">C-C-D</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AndersenNVT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thermo</span></code></p></td>
+<td><p>已加入运行流程</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-model-profile">
+<h3>Raw Model Profile<a class="headerlink" href="#raw-model-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">模型文件：<cite>popg_new.molg</cite></p>
+<ul class="simple">
+<li><p>生成器盒尺寸：<code class="docutils literal notranslate"><span class="pre">20.18</span> <span class="pre">×</span> <span class="pre">20.18</span> <span class="pre">×</span> <span class="pre">23.29</span></code></p></li>
+<li><p>最小距离：<code class="docutils literal notranslate"><span class="pre">0.1</span></code></p></li>
+<li><p>外部引用：无</p></li>
+</ul>
+<p class="rubric">模板与数量</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>模板</p></th>
+<th class="head"><p>定义</p></th>
+<th class="head"><p>数量</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">popg</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(12)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1216</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ion</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1216</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">water</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">64448</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-output-profile">
+<h3>Raw Output Profile<a class="headerlink" href="#raw-output-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>输出类</p></th>
+<th class="head"><p>文件/前缀</p></th>
+<th class="head"><p>周期</p></th>
+<th class="head"><p>选项</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DumpInfo</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data.log</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">200</span></code></p></td>
+<td><p>无额外选项</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOL2Dump</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">particles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">100000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">deleteBoundaryBond(True)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">XMLDump</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">particles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1000000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Bond(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Angle(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Image(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Charge(True)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-meaning-profile">
+<h3>Raw Meaning Profile<a class="headerlink" href="#raw-meaning-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">保守标签</p>
+<ul class="simple">
+<li><p>语义标签：POPG 脂质、离子和水的 MDSCF-PFME 模型</p></li>
+<li><p>置信度：高</p></li>
+<li><p>检索标签：<code class="docutils literal notranslate"><span class="pre">POPG</span></code>, <code class="docutils literal notranslate"><span class="pre">lipid</span></code>, <code class="docutils literal notranslate"><span class="pre">ions</span></code>, <code class="docutils literal notranslate"><span class="pre">MDSCF</span></code></p></li>
+</ul>
+<p class="rubric">适合作为参考</p>
+<ul class="simple">
+<li><p>适合作为带电脂质膜、反离子和溶剂平均场脚本参考。</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="similarity">
+<h2>Similarity<a class="headerlink" href="#similarity" title="Link to this heading">¶</a></h2>
+<div class="aiagent-panel similarity-panel docutils container">
+<p>相似度来自原始建模与动力学字段，仅用于帮助选择可参考的案例。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rank</p></th>
+<th class="head"><p>Case</p></th>
+<th class="head"><p>Similarity</p></th>
+<th class="head"><p>Level</p></th>
+<th class="head"><p>Model</p></th>
+<th class="head"><p>Dynamics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><a class="reference internal" href="case_41.html"><span class="doc">case_41</span></a></p></td>
+<td><p>53.67%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">weak</span></code></p></td>
+<td><p>28.65%</p></td>
+<td><p>35.92%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><a class="reference internal" href="case_44.html"><span class="doc">case_44</span></a></p></td>
+<td><p>52.92%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">weak</span></code></p></td>
+<td><p>28.87%</p></td>
+<td><p>38.95%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tree-views">
+<h2>Tree Views<a class="headerlink" href="#tree-views" title="Link to this heading">¶</a></h2>
+<section id="file-tree">
+<h3>File Tree<a class="headerlink" href="#file-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel file-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_43
+└── runDynamics: popg.py
+    └── input_files
+        └── popg.xml
+            └── generated_by
+                └── model: popg_new.molg
+</pre></div>
+</div>
+</div>
+</section>
+<section id="dynamics-tree">
+<h3>Dynamics Tree<a class="headerlink" href="#dynamics-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel dynamics-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_43
+└── runDynamics: popg.py
+    ├── system_setup
+    │   ├── build_method: XMLReader(&#39;popg.xml&#39;)
+    │   ├── perform_config: PerformConfig(_options.gpu)
+    │   ├── all_info: AllInfo(build_method, perform_config)
+    │   │   └── depends_on: build_method, perform_config
+    │   ├── app: Application(all_info, 0.03)
+    │   │   └── depends_on: all_info
+    │   ├── group: ParticleSet(all_info, &#39;all&#39;)
+    │   │   └── depends_on: all_info
+    │   └── comp_info: ComputeInfo(all_info, group)
+    │       └── depends_on: all_info, group
+    ├── force_pipeline
+    │   ├── [1] scf: MDSCFForce(all_info, 32, 32, 36, 0.1) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   ├── setParams(&#39;L&#39;, &#39;L&#39;, 0.0)
+    │   │   ├── setParams(&#39;L&#39;, &#39;P&#39;, -3.6)
+    │   │   ├── setParams(&#39;L&#39;, &#39;G&#39;, 4.5)
+    │   │   ├── setParams(&#39;L&#39;, &#39;C&#39;, 13.25)
+    │   │   ├── setParams(&#39;L&#39;, &#39;D&#39;, 9.3)
+    │   │   ├── setParams(&#39;L&#39;, &#39;Na&#39;, -6.0)
+    │   │   ├── setParams(&#39;L&#39;, &#39;W&#39;, 0.0)
+    │   │   ├── setParams(&#39;P&#39;, &#39;P&#39;, 0.0)
+    │   │   ├── setParams(&#39;P&#39;, &#39;G&#39;, 2.5)
+    │   │   ├── setParams(&#39;P&#39;, &#39;C&#39;, 13.5)
+    │   │   ├── setParams(&#39;P&#39;, &#39;D&#39;, 11.7)
+    │   │   ├── setParams(&#39;P&#39;, &#39;Na&#39;, 0.0)
+    │   │   ├── setParams(&#39;P&#39;, &#39;W&#39;, -3.6)
+    │   │   ├── setParams(&#39;G&#39;, &#39;G&#39;, 0.0)
+    │   │   ├── setParams(&#39;G&#39;, &#39;C&#39;, 8.3)
+    │   │   ├── setParams(&#39;G&#39;, &#39;D&#39;, 8.3)
+    │   │   ├── setParams(&#39;G&#39;, &#39;Na&#39;, -3.0)
+    │   │   ├── setParams(&#39;G&#39;, &#39;W&#39;, 4.5)
+    │   │   ├── setParams(&#39;C&#39;, &#39;C&#39;, 0.0)
+    │   │   ├── setParams(&#39;C&#39;, &#39;D&#39;, 0.0)
+    │   │   ├── setParams(&#39;C&#39;, &#39;Na&#39;, 13.5)
+    │   │   ├── setParams(&#39;C&#39;, &#39;W&#39;, 33.75)
+    │   │   ├── setParams(&#39;D&#39;, &#39;D&#39;, 0.0)
+    │   │   ├── setParams(&#39;D&#39;, &#39;Na&#39;, 9.3)
+    │   │   ├── setParams(&#39;D&#39;, &#39;W&#39;, 23.25)
+    │   │   ├── setParams(&#39;Na&#39;, &#39;Na&#39;, 0.0)
+    │   │   ├── setParams(&#39;Na&#39;, &#39;W&#39;, 0.0)
+    │   │   ├── setParams(&#39;W&#39;, &#39;W&#39;, 0.0)
+    │   │   └── setPeriodScf(1, 100)
+    │   ├── [2] pfme: PFMEForce(all_info, 32, 32, 36, 2.45, 80.0) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   └── setPeriodPFME(1, 100)
+    │   ├── [3] bondforce: BondForceHarmonic(all_info) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   ├── setParams(&#39;L-P&#39;, 1250.0, 0.37)
+    │   │   ├── setParams(&#39;P-G&#39;, 1250.0, 0.37)
+    │   │   ├── setParams(&#39;G-G&#39;, 1250.0, 0.37)
+    │   │   ├── setParams(&#39;G-C&#39;, 1250.0, 0.47)
+    │   │   ├── setParams(&#39;C-C&#39;, 1250.0, 0.47)
+    │   │   └── setParams(&#39;C-D&#39;, 1250.0, 0.47)
+    │   └── [4] angleforce: AngleForceHarmonicCos(all_info) ; app.add
+    │       ├── depends_on: all_info
+    │       ├── setParams(&#39;P-G-G&#39;, 25.0, 120.0)
+    │       ├── setParams(&#39;P-G-C&#39;, 25.0, 180.0)
+    │       ├── setParams(&#39;G-C-C&#39;, 25.0, 180.0)
+    │       ├── setParams(&#39;C-C-C&#39;, 25.0, 180.0)
+    │       ├── setParams(&#39;G-C-D&#39;, 25.0, 180.0)
+    │       ├── setParams(&#39;C-D-C&#39;, 45.0, 120.0)
+    │       └── setParams(&#39;C-C-D&#39;, 25.0, 180.0)
+    ├── integration_pipeline
+    │   └── [5] thermo: AndersenNVT(all_info, group, T, 7.0, 1234) ; app.add
+    │       └── depends_on: all_info, group
+    ├── output_pipeline
+    │   ├── [6] DInfo: DumpInfo(all_info, comp_info, &#39;data.log&#39;) ; app.add
+    │   │   ├── depends_on: all_info, comp_info
+    │   │   └── setPeriod(200)
+    │   ├── [7] mol2: MOL2Dump(all_info, &#39;particles&#39;) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   ├── setPeriod(100000)
+    │   │   └── deleteBoundaryBond(True)
+    │   └── [8] xml: XMLDump(all_info, &#39;particles&#39;) ; app.add
+    │       ├── depends_on: all_info
+    │       ├── setPeriod(1000000)
+    │       ├── setOutputBond(True)
+    │       ├── setOutputAngle(True)
+    │       ├── setOutputImage(True)
+    │       └── setOutputCharge(True)
+    └── run
+        └── app.run(20000000)
+</pre></div>
+</div>
+</div>
+</section>
+<section id="model-tree">
+<h3>Model Tree<a class="headerlink" href="#model-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel model-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_43
+└── Model Tree: *.molg
+    └── model: popg_new.molg
+        ├── model_templates
+        │   ├── popg: Molecule(12)
+        │   │   ├── setParticleTypes(&#39;L,P,G,G,C,C,C,C,C,D,C,C&#39;)
+        │   │   ├── setTopology(&#39;0-1,1-2,2-3,2-4,4-5,5-6,6-7,3-8,8-9,9-10,10-11&#39;)
+        │   │   ├── setBondLength(0.47)
+        │   │   ├── setBondLength(&#39;L&#39;, &#39;P&#39;, 0.37)
+        │   │   ├── setBondLength(&#39;P&#39;, &#39;G&#39;, 0.37)
+        │   │   ├── setBondLength(&#39;G&#39;, &#39;G&#39;, 0.37)
+        │   │   ├── setMass(72.0)
+        │   │   ├── setAngleDegree(&#39;P&#39;, &#39;G&#39;, &#39;G&#39;, 120)
+        │   │   ├── setAngleDegree(&#39;P&#39;, &#39;G&#39;, &#39;C&#39;, 180)
+        │   │   ├── setAngleDegree(&#39;G&#39;, &#39;C&#39;, &#39;C&#39;, 180)
+        │   │   ├── setAngleDegree(&#39;C&#39;, &#39;C&#39;, &#39;C&#39;, 180)
+        │   │   ├── setAngleDegree(&#39;G&#39;, &#39;C&#39;, &#39;D&#39;, 180)
+        │   │   ├── setAngleDegree(&#39;C&#39;, &#39;D&#39;, &#39;C&#39;, 120)
+        │   │   ├── setAngleDegree(&#39;C&#39;, &#39;C&#39;, &#39;D&#39;, 180)
+        │   │   ├── setCharge(&#39;P&#39;, -11.787088)
+        │   │   └── setBox(-10.09, 10.09, -2.0, 2.0, -11.645, 11.645)
+        │   ├── ion: Molecule(1)
+        │   │   ├── setParticleTypes(&#39;Na&#39;)
+        │   │   ├── setMass(72.0)
+        │   │   └── setCharge(11.787088)
+        │   └── water: Molecule(1)
+        │       ├── setParticleTypes(&#39;W&#39;)
+        │       └── setMass(72.0)
+        ├── generator_pipeline
+        │   └── gen: Generators(20.18, 20.18, 23.29)
+        │       ├── addMolecule(popg, 1216)
+        │       │   └── depends_on: popg
+        │       ├── addMolecule(ion, 1216)
+        │       │   └── depends_on: ion
+        │       ├── addMolecule(water, 64448)
+        │       │   └── depends_on: water
+        │       ├── setMinimumDistance(0.1)
+        │       └── outPutXML(&#39;popg&#39;)
+        │           └── generates: popg.xml
+        ├── references
+        │   └── none
+        └── generates
+            └── popg.xml ; producer: gen.outPutXML
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="raw-evidence-and-source-files">
+<h2>Raw Evidence and Source Files<a class="headerlink" href="#raw-evidence-and-source-files" title="Link to this heading">¶</a></h2>
+<section id="rundynamics-py">
+<h3>runDynamics.py<a class="headerlink" href="#rundynamics-py" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel raw-file-panel python-source-panel docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">cu_gala</span> <span class="k">as</span> <span class="n">gala</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">_options</span>
+<span class="linenos"> 3</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;popg.xml&#39;</span>
+<span class="linenos"> 4</span><span class="n">build_method</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">XMLReader</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">perform_config</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">PerformConfig</span><span class="p">(</span><span class="n">_options</span><span class="o">.</span><span class="n">gpu</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">all_info</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">AllInfo</span><span class="p">(</span><span class="n">build_method</span><span class="p">,</span> <span class="n">perform_config</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">epsilonr</span> <span class="o">=</span> <span class="mf">80.0</span>
+<span class="linenos"> 8</span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.03</span>
+<span class="linenos"> 9</span><span class="n">Temperature</span> <span class="o">=</span> <span class="mf">301.15</span>
+<span class="linenos">10</span><span class="n">T</span> <span class="o">=</span> <span class="n">Temperature</span> <span class="o">*</span> <span class="mf">8.3143</span> <span class="o">/</span> <span class="mf">1000.0</span>
+<span class="linenos">11</span><span class="n">app</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">scf</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">MDSCFForce</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.6</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mf">13.25</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.0</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">11.7</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.6</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mf">8.3</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">8.3</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="linenos">30</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">32</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">33</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">)</span>
+<span class="linenos">34</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">33.75</span><span class="p">)</span>
+<span class="linenos">35</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">36</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="mf">9.3</span><span class="p">)</span>
+<span class="linenos">37</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">23.25</span><span class="p">)</span>
+<span class="linenos">38</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">40</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">41</span><span class="n">scf</span><span class="o">.</span><span class="n">setPeriodScf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">42</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">scf</span><span class="p">)</span>
+<span class="linenos">43</span><span class="n">pfme</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">PFMEForce</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mf">2.45</span><span class="p">,</span> <span class="n">epsilonr</span><span class="p">)</span>
+<span class="linenos">44</span><span class="n">pfme</span><span class="o">.</span><span class="n">setPeriodPFME</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">45</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pfme</span><span class="p">)</span>
+<span class="linenos">46</span><span class="n">bondforce</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">BondForceHarmonic</span><span class="p">(</span><span class="n">all_info</span><span class="p">)</span>
+<span class="linenos">47</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;L-P&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos">48</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P-G&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos">49</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G-G&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos">50</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G-C&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">)</span>
+<span class="linenos">51</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C-C&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">)</span>
+<span class="linenos">52</span><span class="n">bondforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C-D&#39;</span><span class="p">,</span> <span class="mf">1250.0</span><span class="p">,</span> <span class="mf">0.47</span><span class="p">)</span>
+<span class="linenos">53</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bondforce</span><span class="p">)</span>
+<span class="linenos">54</span><span class="n">angleforce</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">AngleForceHarmonicCos</span><span class="p">(</span><span class="n">all_info</span><span class="p">)</span>
+<span class="linenos">55</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P-G-G&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">)</span>
+<span class="linenos">56</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P-G-C&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
+<span class="linenos">57</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G-C-C&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
+<span class="linenos">58</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C-C-C&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
+<span class="linenos">59</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;G-C-D&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
+<span class="linenos">60</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C-D-C&#39;</span><span class="p">,</span> <span class="mf">45.0</span><span class="p">,</span> <span class="mf">120.0</span><span class="p">)</span>
+<span class="linenos">61</span><span class="n">angleforce</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;C-C-D&#39;</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">)</span>
+<span class="linenos">62</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">angleforce</span><span class="p">)</span>
+<span class="linenos">63</span><span class="n">group</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">ParticleSet</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="linenos">64</span><span class="n">comp_info</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">ComputeInfo</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+<span class="linenos">65</span><span class="n">thermo</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">AndersenNVT</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mi">1234</span><span class="p">)</span>
+<span class="linenos">66</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">thermo</span><span class="p">)</span>
+<span class="linenos">67</span><span class="n">DInfo</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">DumpInfo</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">comp_info</span><span class="p">,</span> <span class="s1">&#39;data.log&#39;</span><span class="p">)</span>
+<span class="linenos">68</span><span class="n">DInfo</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos">69</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">DInfo</span><span class="p">)</span>
+<span class="linenos">70</span><span class="n">mol2</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">MOL2Dump</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="s1">&#39;particles&#39;</span><span class="p">)</span>
+<span class="linenos">71</span><span class="n">mol2</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="linenos">72</span><span class="n">mol2</span><span class="o">.</span><span class="n">deleteBoundaryBond</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">73</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+<span class="linenos">74</span><span class="n">xml</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">XMLDump</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="s1">&#39;particles&#39;</span><span class="p">)</span>
+<span class="linenos">75</span><span class="n">xml</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="linenos">76</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputBond</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">77</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputAngle</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">78</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputImage</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">79</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputCharge</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">80</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+<span class="linenos">81</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">20000000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="branch-files">
+<h3>Branch Files<a class="headerlink" href="#branch-files" title="Link to this heading">¶</a></h3>
+<section id="popg-new-molg">
+<h4>popg_new.molg<a class="headerlink" href="#popg-new-molg" title="Link to this heading">¶</a></h4>
+<div class="aiagent-panel raw-file-panel docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">molgen</span>
+<span class="linenos"> 2</span><span class="n">popg</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="n">popg</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;L,P,G,G,C,C,C,C,C,D,C,C&#39;</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="n">popg</span><span class="o">.</span><span class="n">setTopology</span><span class="p">(</span><span class="s1">&#39;0-1,1-2,2-3,2-4,4-5,5-6,6-7,3-8,8-9,9-10,10-11&#39;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">popg</span><span class="o">.</span><span class="n">setBondLength</span><span class="p">(</span><span class="mf">0.47</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">popg</span><span class="o">.</span><span class="n">setBondLength</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">popg</span><span class="o">.</span><span class="n">setBondLength</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">popg</span><span class="o">.</span><span class="n">setBondLength</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">popg</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">popg</span><span class="o">.</span><span class="n">setAngleDegree</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">popg</span><span class="o">.</span><span class="n">setCharge</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.787088</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">popg</span><span class="o">.</span><span class="n">setBox</span><span class="p">(</span><span class="o">-</span><span class="mf">10.09</span><span class="p">,</span> <span class="mf">10.09</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.645</span><span class="p">,</span> <span class="mf">11.645</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">ion</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">ion</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;Na&#39;</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">ion</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">ion</span><span class="o">.</span><span class="n">setCharge</span><span class="p">(</span><span class="mf">11.787088</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">water</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">water</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">water</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">gen</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Generators</span><span class="p">(</span><span class="mf">20.18</span><span class="p">,</span> <span class="mf">20.18</span><span class="p">,</span> <span class="mf">23.29</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">popg</span><span class="p">,</span> <span class="mi">1216</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">ion</span><span class="p">,</span> <span class="mi">1216</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">water</span><span class="p">,</span> <span class="mi">64448</span><span class="p">)</span>
+<span class="linenos">30</span><span class="n">gen</span><span class="o">.</span><span class="n">setMinimumDistance</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">gen</span><span class="o">.</span><span class="n">outPutXML</span><span class="p">(</span><span class="s1">&#39;popg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">PyGAMD Manual</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/generated/index.html">BaseRAG Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../expansion/index.html">Expansion Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">EnhancedRAG Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

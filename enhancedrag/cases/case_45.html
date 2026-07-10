@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>case_45 — [1] dynamics - [2] model &#8212; PyGAMD Manual  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a817f74c" />
+    <script src="../../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/title_color_picker.js?v=0f95104d"></script>
+    <script src="../../_static/method_navigation_sidebar.js?v=8a287b32"></script>
+    <script src="../../_static/copy_code_blocks.js?v=1402178e"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="case-45-1-dynamics-2-model">
+<h1>case_45 — [1] dynamics - [2] model<a class="headerlink" href="#case-45-1-dynamics-2-model" title="Link to this heading">¶</a></h1>
+<section id="run-instructions">
+<h2>Run Instructions<a class="headerlink" href="#run-instructions" title="Link to this heading">¶</a></h2>
+<div class="aiagent-panel run-panel docutils container">
+<p class="rubric">Branch Files</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python hexagonal.py
+python polyelectrolyte-combine_new.molg
+</pre></div>
+</div>
+<p class="rubric">Root</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python runDynamics.py --gpu=0
+</pre></div>
+</div>
+</div>
+</section>
+<section id="case-facts">
+<h2>Case Facts<a class="headerlink" href="#case-facts" title="Link to this heading">¶</a></h2>
+<section id="raw-dynamics-profile">
+<h3>Raw Dynamics Profile<a class="headerlink" href="#raw-dynamics-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">基本设置</p>
+<ul class="simple">
+<li><p>引擎：PyGAMD (poetry.cu_gala)</p></li>
+<li><p>输入 XML：<code class="docutils literal notranslate"><span class="pre">double-layer.xml</span></code></p></li>
+<li><p>时间步长：<code class="docutils literal notranslate"><span class="pre">0.005</span></code></p></li>
+<li><p>粒子组：<code class="docutils literal notranslate"><span class="pre">896</span></code></p></li>
+<li><p>运行步数：100000000</p></li>
+</ul>
+<p class="rubric">动力学模块</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>类</p></th>
+<th class="head"><p>变量</p></th>
+<th class="head"><p>简要事实</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MDSCFForce</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scf</span></code></p></td>
+<td><p>设置 6 项：<code class="docutils literal notranslate"><span class="pre">P-P</span></code>, <code class="docutils literal notranslate"><span class="pre">N-N</span></code>, <code class="docutils literal notranslate"><span class="pre">W-W</span></code>, <code class="docutils literal notranslate"><span class="pre">P-N</span></code>, <code class="docutils literal notranslate"><span class="pre">P-W</span></code>, <code class="docutils literal notranslate"><span class="pre">N-W</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PFMEForce</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pfme</span></code></p></td>
+<td><p>已加入运行流程</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AndersenNVT</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">thermo</span></code></p></td>
+<td><p>已加入运行流程</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Sort</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sort_method</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">setPeriod(400)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ZeroMomentum</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ZeroMomentum</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">setPeriod(0)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-model-profile">
+<h3>Raw Model Profile<a class="headerlink" href="#raw-model-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">模型文件：<cite>polyelectrolyte-combine_new.molg</cite></p>
+<ul class="simple">
+<li><p>生成器盒尺寸：<code class="docutils literal notranslate"><span class="pre">14.0</span> <span class="pre">×</span> <span class="pre">13.8568</span> <span class="pre">×</span> <span class="pre">14.0</span></code></p></li>
+<li><p>最小距离：<code class="docutils literal notranslate"><span class="pre">0.4</span></code></p></li>
+<li><p>外部引用：<code class="docutils literal notranslate"><span class="pre">wall.xml</span></code></p></li>
+</ul>
+<p class="rubric">模板与数量</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>模板</p></th>
+<th class="head"><p>定义</p></th>
+<th class="head"><p>数量</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mol0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule('wall.xml',</span> <span class="pre">896)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mol2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ni</span> <span class="pre">-</span> <span class="pre">nc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mol3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ni</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mol1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">molgen.Molecule(1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">20505</span> <span class="pre">-</span> <span class="pre">ni</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">nc</span> <span class="pre">-</span> <span class="pre">896</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-output-profile">
+<h3>Raw Output Profile<a class="headerlink" href="#raw-output-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>输出类</p></th>
+<th class="head"><p>文件/前缀</p></th>
+<th class="head"><p>周期</p></th>
+<th class="head"><p>选项</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DumpInfo</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data.log</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">200</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dumpVirialEnergy(pfme)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOL2Dump</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">particles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>无额外选项</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">XMLDump</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">particles</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">100000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Velocity(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Mass(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Image(True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Bond(True)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="raw-meaning-profile">
+<h3>Raw Meaning Profile<a class="headerlink" href="#raw-meaning-profile" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel from-llm-panel docutils container">
+<p class="rubric">保守标签</p>
+<ul class="simple">
+<li><p>语义标签：含壁面对象的电双层/盐水平均场模型</p></li>
+<li><p>置信度：高</p></li>
+<li><p>检索标签：<code class="docutils literal notranslate"><span class="pre">double_layer</span></code>, <code class="docutils literal notranslate"><span class="pre">wall</span></code>, <code class="docutils literal notranslate"><span class="pre">ions</span></code>, <code class="docutils literal notranslate"><span class="pre">MDSCF</span></code>, <code class="docutils literal notranslate"><span class="pre">PFME</span></code></p></li>
+</ul>
+<p class="rubric">适合作为参考</p>
+<ul class="simple">
+<li><p>适合作为固壁附近离子分布、电双层和带电界面脚本参考。</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="similarity">
+<h2>Similarity<a class="headerlink" href="#similarity" title="Link to this heading">¶</a></h2>
+<div class="aiagent-panel similarity-panel docutils container">
+<p>相似度来自原始建模与动力学字段，仅用于帮助选择可参考的案例。</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rank</p></th>
+<th class="head"><p>Case</p></th>
+<th class="head"><p>Similarity</p></th>
+<th class="head"><p>Level</p></th>
+<th class="head"><p>Model</p></th>
+<th class="head"><p>Dynamics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><a class="reference internal" href="case_36.html"><span class="doc">case_36</span></a></p></td>
+<td><p>54.42%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">weak</span></code></p></td>
+<td><p>15.49%</p></td>
+<td><p>54.49%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><a class="reference internal" href="case_37.html"><span class="doc">case_37</span></a></p></td>
+<td><p>54.32%</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">weak</span></code></p></td>
+<td><p>15.49%</p></td>
+<td><p>54.49%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tree-views">
+<h2>Tree Views<a class="headerlink" href="#tree-views" title="Link to this heading">¶</a></h2>
+<section id="file-tree">
+<h3>File Tree<a class="headerlink" href="#file-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel file-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_45
+└── runDynamics: polyelectrolyte.py
+    └── input_files
+        └── double-layer.xml
+            └── generated_by
+                └── model: polyelectrolyte-combine_new.molg
+                    └── references
+                        └── wall.xml
+                            └── generated_by
+                                └── script: hexagonal.py
+</pre></div>
+</div>
+</div>
+</section>
+<section id="dynamics-tree">
+<h3>Dynamics Tree<a class="headerlink" href="#dynamics-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel dynamics-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_45
+└── runDynamics: polyelectrolyte.py
+    ├── system_setup
+    │   ├── build_method: XMLReader(&#39;double-layer.xml&#39;)
+    │   ├── perform_config: PerformConfig(_options.gpu)
+    │   ├── all_info: AllInfo(build_method, perform_config)
+    │   │   └── depends_on: build_method, perform_config
+    │   ├── app: Application(all_info, 0.005)
+    │   │   └── depends_on: all_info
+    │   ├── group: ParticleSet(all_info, 896, 20504)
+    │   │   └── depends_on: all_info
+    │   └── comp_info: ComputeInfo(all_info, group)
+    │       └── depends_on: all_info, group
+    ├── force_pipeline
+    │   ├── [1] scf: MDSCFForce(all_info, 42, 42, 42, 0.05) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   ├── setParams(&#39;P&#39;, &#39;P&#39;, 0)
+    │   │   ├── setParams(&#39;N&#39;, &#39;N&#39;, 0)
+    │   │   ├── setParams(&#39;W&#39;, &#39;W&#39;, 0)
+    │   │   ├── setParams(&#39;P&#39;, &#39;N&#39;, 0)
+    │   │   ├── setParams(&#39;P&#39;, &#39;W&#39;, 0)
+    │   │   ├── setParams(&#39;N&#39;, &#39;W&#39;, 0)
+    │   │   └── setPeriodScf(1, 1)
+    │   └── [2] pfme: PFMEForce(all_info, 42, 42, 42, 4.2, 20) ; app.add
+    │       ├── depends_on: all_info
+    │       └── setPeriodPFME(1, 1)
+    ├── integration_pipeline
+    │   └── [3] thermo: AndersenNVT(all_info, group, T, 7.0, 1234) ; app.add
+    │       └── depends_on: all_info, group
+    ├── runtime_tools
+    │   ├── [4] sort_method: Sort(all_info) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   └── setPeriod(400)
+    │   └── [5] ZeroMomentum: ZeroMomentum(all_info) ; app.add
+    │       ├── depends_on: all_info
+    │       └── setPeriod(0)
+    ├── output_pipeline
+    │   ├── [6] DInfo: DumpInfo(all_info, comp_info, &#39;data.log&#39;) ; app.add
+    │   │   ├── depends_on: all_info, comp_info
+    │   │   ├── setPeriod(200)
+    │   │   └── dumpVirialEnergy(pfme)
+    │   ├── [7] mol2: MOL2Dump(all_info, &#39;particles&#39;) ; app.add
+    │   │   ├── depends_on: all_info
+    │   │   └── setPeriod(0)
+    │   └── [8] xml: XMLDump(all_info, &#39;particles&#39;) ; app.add
+    │       ├── depends_on: all_info
+    │       ├── setPeriod(100000)
+    │       ├── setOutputVelocity(True)
+    │       ├── setOutputMass(True)
+    │       ├── setOutputImage(True)
+    │       └── setOutputBond(True)
+    └── run
+        └── app.run(100000000)
+</pre></div>
+</div>
+</div>
+</section>
+<section id="model-tree">
+<h3>Model Tree<a class="headerlink" href="#model-tree" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel tree-panel model-tree-panel docutils container">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>case_45
+└── Model Tree: *.molg
+    └── model: polyelectrolyte-combine_new.molg
+        ├── model_templates
+        │   ├── mol0: Molecule(&#39;wall.xml&#39;, 896)
+        │   │   └── references
+        │   │       └── wall.xml
+        │   ├── mol1: Molecule(1)
+        │   │   ├── setParticleTypes(&#39;W&#39;)
+        │   │   ├── setMass(72.0)
+        │   │   └── setCharge(0.0)
+        │   ├── mol2: Molecule(1)
+        │   │   ├── setParticleTypes(&#39;P&#39;)
+        │   │   ├── setMass(72.0)
+        │   │   └── setCharge(q)
+        │   └── mol3: Molecule(1)
+        │       ├── setParticleTypes(&#39;N&#39;)
+        │       ├── setMass(72.0)
+        │       └── setCharge(-q)
+        ├── generator_pipeline
+        │   └── gen: Generators(14.0, 13.8568, 14.0)
+        │       ├── addMolecule(mol0, 1)
+        │       │   └── depends_on: mol0
+        │       ├── addMolecule(mol2, ni - nc)
+        │       │   └── depends_on: mol2
+        │       ├── addMolecule(mol3, ni)
+        │       │   └── depends_on: mol3
+        │       ├── addMolecule(mol1, 20505 - ni * 2 + nc - 896)
+        │       │   └── depends_on: mol1
+        │       ├── setMinimumDistance(0.4)
+        │       └── outPutXML(&#39;double-layer&#39;)
+        │           └── generates: double-layer.xml
+        ├── references
+        │   └── wall.xml ; used_by: mol0: Molecule constructor
+        └── generates
+            └── double-layer.xml ; producer: gen.outPutXML
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="raw-evidence-and-source-files">
+<h2>Raw Evidence and Source Files<a class="headerlink" href="#raw-evidence-and-source-files" title="Link to this heading">¶</a></h2>
+<section id="rundynamics-py">
+<h3>runDynamics.py<a class="headerlink" href="#rundynamics-py" title="Link to this heading">¶</a></h3>
+<div class="aiagent-panel raw-file-panel python-source-panel docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">cu_gala</span> <span class="k">as</span> <span class="n">gala</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">_options</span>
+<span class="linenos"> 3</span><span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;double-layer.xml&#39;</span>
+<span class="linenos"> 4</span><span class="n">build_method</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">XMLReader</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">perform_config</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">PerformConfig</span><span class="p">(</span><span class="n">_options</span><span class="o">.</span><span class="n">gpu</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">all_info</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">AllInfo</span><span class="p">(</span><span class="n">build_method</span><span class="p">,</span> <span class="n">perform_config</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.005</span>
+<span class="linenos"> 8</span><span class="n">app</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">scf</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">MDSCFForce</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">scf</span><span class="o">.</span><span class="n">setParams</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">scf</span><span class="o">.</span><span class="n">setPeriodScf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">scf</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">pfme</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">PFMEForce</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">pfme</span><span class="o">.</span><span class="n">setPeriodPFME</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pfme</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">group</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">ParticleSet</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="mi">896</span><span class="p">,</span> <span class="mi">20504</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">comp_info</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">ComputeInfo</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">Temperature</span> <span class="o">=</span> <span class="mf">300.0</span>
+<span class="linenos">24</span><span class="n">T</span> <span class="o">=</span> <span class="n">Temperature</span> <span class="o">*</span> <span class="mf">8.3143</span> <span class="o">/</span> <span class="mf">1000.0</span>
+<span class="linenos">25</span><span class="n">thermo</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">AndersenNVT</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mi">1234</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">thermo</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">sort_method</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">Sort</span><span class="p">(</span><span class="n">all_info</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">sort_method</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sort_method</span><span class="p">)</span>
+<span class="linenos">30</span><span class="n">ZeroMomentum</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">ZeroMomentum</span><span class="p">(</span><span class="n">all_info</span><span class="p">)</span>
+<span class="linenos">31</span><span class="n">ZeroMomentum</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">32</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ZeroMomentum</span><span class="p">)</span>
+<span class="linenos">33</span><span class="n">DInfo</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">DumpInfo</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="n">comp_info</span><span class="p">,</span> <span class="s1">&#39;data.log&#39;</span><span class="p">)</span>
+<span class="linenos">34</span><span class="n">DInfo</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos">35</span><span class="n">DInfo</span><span class="o">.</span><span class="n">dumpVirialEnergy</span><span class="p">(</span><span class="n">pfme</span><span class="p">)</span>
+<span class="linenos">36</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">DInfo</span><span class="p">)</span>
+<span class="linenos">37</span><span class="n">mol2</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">MOL2Dump</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="s1">&#39;particles&#39;</span><span class="p">)</span>
+<span class="linenos">38</span><span class="n">mol2</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+<span class="linenos">40</span><span class="n">xml</span> <span class="o">=</span> <span class="n">gala</span><span class="o">.</span><span class="n">XMLDump</span><span class="p">(</span><span class="n">all_info</span><span class="p">,</span> <span class="s1">&#39;particles&#39;</span><span class="p">)</span>
+<span class="linenos">41</span><span class="n">xml</span><span class="o">.</span><span class="n">setPeriod</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="linenos">42</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputVelocity</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">43</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputMass</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">44</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputImage</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">45</span><span class="n">xml</span><span class="o">.</span><span class="n">setOutputBond</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">46</span><span class="n">app</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+<span class="linenos">47</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">100000000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="branch-files">
+<h3>Branch Files<a class="headerlink" href="#branch-files" title="Link to this heading">¶</a></h3>
+<section id="hexagonal-py">
+<h4>hexagonal.py<a class="headerlink" href="#hexagonal-py" title="Link to this heading">¶</a></h4>
+<div class="aiagent-panel raw-file-panel docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="linenos"> 4</span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="linenos"> 5</span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="linenos"> 6</span><span class="n">density</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos"> 7</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="linenos"> 8</span><span class="n">pos</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 9</span><span class="nb">type</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">10</span><span class="n">mass</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">11</span><span class="n">charge</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos">12</span><span class="n">nx</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="linenos">13</span><span class="n">ny</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="linenos">14</span><span class="n">nc</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">15</span><span class="n">n</span> <span class="o">=</span> <span class="n">nx</span> <span class="o">*</span> <span class="n">ny</span>
+<span class="linenos">16</span><span class="n">d</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">17</span><span class="n">h</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="linenos">18</span><span class="n">lx</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span>
+<span class="linenos">19</span><span class="n">ly</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span> <span class="o">*</span> <span class="n">h</span>
+<span class="linenos">20</span><span class="n">prob</span> <span class="o">=</span> <span class="n">lx</span> <span class="o">*</span> <span class="n">ly</span> <span class="o">*</span> <span class="n">density</span> <span class="o">/</span> <span class="p">(</span><span class="mf">0.47</span> <span class="o">*</span> <span class="mf">0.47</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="linenos">21</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+<span class="linenos">22</span>    <span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="linenos">23</span>    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos">24</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="linenos">25</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">h</span>
+<span class="linenos">26</span>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="nb">id</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">nx</span>
+<span class="linenos">28</span>        <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="linenos">29</span>        <span class="n">x</span> <span class="o">+=</span> <span class="n">d</span>
+<span class="linenos">30</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="linenos">31</span>    <span class="n">posi</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="linenos">32</span>    <span class="n">px</span> <span class="o">=</span> <span class="n">posi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">lx</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="linenos">33</span>    <span class="n">py</span> <span class="o">=</span> <span class="n">posi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ly</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="linenos">34</span>    <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">)</span>
+<span class="linenos">35</span>    <span class="nb">type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="linenos">36</span>    <span class="n">mass</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">37</span>    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">prob</span><span class="p">:</span>
+<span class="linenos">38</span>        <span class="n">con</span> <span class="o">=</span> <span class="mf">138.935443519744</span>
+<span class="linenos">39</span>        <span class="n">q</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">con</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">)</span>
+<span class="linenos">40</span>        <span class="n">charge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="linenos">41</span>        <span class="n">nc</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">42</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">43</span>        <span class="n">charge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">44</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the number of charges &#39;</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="s1">&#39; target &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">prob</span> <span class="o">*</span> <span class="n">n</span><span class="p">))</span>
+<span class="linenos">45</span><span class="n">opd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;wall.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos">46</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;?xml version =&quot;1.0&quot; encoding =&quot;UTF-8&quot; ?&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">47</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;galamost_xml version=&quot;1.3&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">48</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;configuration time_step=&quot;0&quot; dimensions=&quot;2&quot; natoms=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;&quot; &gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">49</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;box lx=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lx</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot; ly=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ly</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot; lz=&quot;0.0&quot;/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">50</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;position num=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">51</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)):</span>
+<span class="linenos">52</span>    <span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">53</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/position&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">54</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;type num=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">type</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">55</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">type</span><span class="p">)):</span>
+<span class="linenos">56</span>    <span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">type</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">57</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/type&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">58</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;mass num=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mass</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">59</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mass</span><span class="p">)):</span>
+<span class="linenos">60</span>    <span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">mass</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">61</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/mass&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">62</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;charge num=&quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">charge</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">63</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">charge</span><span class="p">)):</span>
+<span class="linenos">64</span>    <span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">charge</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">65</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/charge&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">66</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/configuration&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">67</span><span class="n">opd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/galamost_xml&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="polyelectrolyte-combine-new-molg">
+<h4>polyelectrolyte-combine_new.molg<a class="headerlink" href="#polyelectrolyte-combine-new-molg" title="Link to this heading">¶</a></h4>
+<div class="aiagent-panel raw-file-panel docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">poetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">molgen</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="linenos"> 3</span><span class="n">c</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="linenos"> 4</span><span class="n">nc</span> <span class="o">=</span> <span class="mi">87</span>
+<span class="linenos"> 5</span><span class="n">v</span> <span class="o">=</span> <span class="mf">14.0</span> <span class="o">*</span> <span class="mf">13.856</span> <span class="o">*</span> <span class="mf">14.0</span>
+<span class="linenos"> 6</span><span class="n">ni</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="mf">0.602</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="linenos"> 8</span><span class="n">con</span> <span class="o">=</span> <span class="mf">138.935443519744</span>
+<span class="linenos"> 9</span><span class="n">q</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">con</span> <span class="o">/</span> <span class="n">epsilon</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">mol0</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="s1">&#39;wall.xml&#39;</span><span class="p">,</span> <span class="mi">896</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">mol1</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">mol1</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">mol1</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">mol1</span><span class="o">.</span><span class="n">setCharge</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">mol2</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">mol2</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">mol2</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">mol2</span><span class="o">.</span><span class="n">setCharge</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">mol3</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Molecule</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">mol3</span><span class="o">.</span><span class="n">setParticleTypes</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="linenos">21</span><span class="n">mol3</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="mf">72.0</span><span class="p">)</span>
+<span class="linenos">22</span><span class="n">mol3</span><span class="o">.</span><span class="n">setCharge</span><span class="p">(</span><span class="o">-</span><span class="n">q</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">gen</span> <span class="o">=</span> <span class="n">molgen</span><span class="o">.</span><span class="n">Generators</span><span class="p">(</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">13.8568</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">mol0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">mol2</span><span class="p">,</span> <span class="n">ni</span> <span class="o">-</span> <span class="n">nc</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">mol3</span><span class="p">,</span> <span class="n">ni</span><span class="p">)</span>
+<span class="linenos">27</span><span class="n">gen</span><span class="o">.</span><span class="n">addMolecule</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="mi">20505</span> <span class="o">-</span> <span class="n">ni</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">nc</span> <span class="o">-</span> <span class="mi">896</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">gen</span><span class="o">.</span><span class="n">setMinimumDistance</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">gen</span><span class="o">.</span><span class="n">outPutXML</span><span class="p">(</span><span class="s1">&#39;double-layer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">PyGAMD Manual</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/generated/index.html">BaseRAG Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../expansion/index.html">Expansion Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">EnhancedRAG Cases</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
