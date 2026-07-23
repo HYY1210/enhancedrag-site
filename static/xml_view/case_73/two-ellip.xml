@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<galamost_xml version="1.3">
+<configuration time_step="0" dimensions="3" natoms="2" >
+<box lx="10" ly="10" lz="10"/>
+<position num="2">
+-1.5 0.0 0.2
+1.5 0.0 0.0
+</position>
+<mass num="2">
+1.0000000000
+1.0000000000
+</mass>
+<type num="2">
+A
+A
+</type>
+<quaternion num="2">
+1.0 0.0 0.0 0.0
+1.0 0.0 0.0 0.0
+</quaternion>
+<body num="2">
+0
+1
+</body>
+<bond>
+b0 0 1
+</bond>
+<angle>
+a0 0 0 1
+a0 1 1 0
+</angle>
+<dihedral>
+d0 0 0 1 1
+</dihedral>
+<Aspheres>
+A 1.0 1.0 3.0 1.0 1.0 0.2       #a,b,c,eia_one,eib_one,eic_one
+</Aspheres>
+</configuration>
+</galamost_xml>
